@@ -1,0 +1,14 @@
+﻿<div class="card mt-4">
+    <h4 class="card-header">Home</h4>
+    <div class="card-body">
+        <p>You're logged in with Angular & JWT!!</p>
+        <p>Your role is: <strong >{{user.role| initials:user.role}}</strong>.</p>
+        <p>This page can be accessed by <u>all authenticated users</u>.</p>
+        
+        <p class="mb-1">Current user from secure api end point:</p>
+        <app-loader *ngIf="loading"></app-loader>
+        <ul *ngIf="userFromApi">
+            <li>{{userFromApi.firstName}} {{userFromApi.lastName}}</li>
+        </ul>
+    </div>
+</div>
