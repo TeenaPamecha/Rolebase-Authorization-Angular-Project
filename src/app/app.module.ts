@@ -3,19 +3,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-// used to create fake backend
-import { fakeBackendProvider } from './core/interceptors';
-
-import { AppComponent } from './app.component';
-
-import {CoreModule} from './core/core.module';
+import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
-
-import { JwtInterceptor, ErrorInterceptor } from './core/interceptors';
-import { HomeModule } from './home/home.module';
+import { NormalUserModule } from './normalUser/normalUser.module';
 import { AdminModule } from './admin/admin.module';
-import { LoginComponent } from './login';
+import { AuthModule } from './auth/auth.module'
+
+import { JwtInterceptor, ErrorInterceptor, fakeBackendProvider } from './core/interceptors';
+
+import { AppComponent } from './app.component';
 
 @NgModule({
     imports: [
@@ -23,14 +20,14 @@ import { LoginComponent } from './login';
         ReactiveFormsModule,
         CoreModule,
         SharedModule,
-        HomeModule,
+        NormalUserModule,
         AdminModule,
+        AuthModule,
         HttpClientModule,
         AppRoutingModule
     ],
     declarations: [
-        AppComponent,
-        LoginComponent
+        AppComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

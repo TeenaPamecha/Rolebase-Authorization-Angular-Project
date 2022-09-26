@@ -31,9 +31,8 @@ export class HasPermissionDirective {
       return true;
     }
     const hasPermission = false;
-    debugger;
     if (this.currentUser && this.currentUser.role != '') {
-      const userRoles = this.currentUser.role;
+      const userRoles = this.currentUser.role == 'admin'? this.currentUser.role : '';
       return this.permissions.some((permission) =>
         this.existPermission(userRoles, permission)
       );

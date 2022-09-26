@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { LoginComponent } from './login';
 import { AuthGuard } from './core/guards/auth.guard';
 import { Role } from './core/models';
 
@@ -9,10 +8,11 @@ const routes: Routes = [
     {
         path: '',
         loadChildren: () =>
-          import('./home/home.module').then(
-            (m) => m.HomeModule
+          import('./normalUser/normalUser.module').then(
+            (m) => m.NormalUserModule
           ),
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        data: { roles: [Role.User] }
     },
     {
         path: 'admin',
@@ -24,11 +24,9 @@ const routes: Routes = [
         data: { roles: [Role.Admin] }
     },
     {
-        path: 'login',
-        component: LoginComponent
+      path: '',
+      loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
     },
-
-    // otherwise redirect to home
     { path: '**', redirectTo: '' }
 ];
 

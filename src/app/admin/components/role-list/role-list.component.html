@@ -1,0 +1,24 @@
+<div class="card mt-4">
+    <h4 class="card-header">Admin</h4>
+    <div class="card-body">
+        <p>This page can be accessed <u>only by administrators</u>.</p>
+       
+        Pipe Concept<br>
+        Default pipe(pure pipe) : <p>{{today | date:'dd/MM/yyyy HH:mm:ss a' | uppercase}}</p> 
+        Custom pipe(impure pipe) : <p>one day before date: {{today | dateformat:1}}</p><br>
+
+        Directive
+        <div *hasPermission="['admin']">
+            <b>Structure Directive(role wise)</b> administrators User Code
+            <span [ngStyle]="{'color' : today ? 'red' : ''}"  appHighlight>
+            <b>Built-in Directive(color)</b> #1234567890 (hover on attribute Directive)</span>
+            </div> <br>
+
+         Service for list of user    
+        <p class="mb-1">All users from secure (admin only) api end point:</p>
+        <app-loader *ngIf="loading"></app-loader>
+        <ul *ngIf="users">
+            <li *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</li>
+        </ul>
+    </div>
+</div>
