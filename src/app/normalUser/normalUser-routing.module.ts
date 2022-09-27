@@ -6,7 +6,7 @@ import * as formSharedComponents from '../shared';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'normalUser',
     component: NormalUserComponent,
     children: [
       {

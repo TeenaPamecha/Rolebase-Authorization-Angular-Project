@@ -141,10 +141,17 @@ export class SidebarComponent implements OnInit {
 
     switch (this.activeTab?.name) {
       case 'Users':
-        this.activeChildTab =
-          this.router.url.split('/')[2] === 'change-password'
-            ? this.tabs[1].child.types[1]
-            : this.tabs[1].child.types[0];
+       
+          if(this.router.url.split('/')[2] === 'change-password'){
+            this.activeChildTab = this.tabs[1].child.types[1]
+            this.tabs[1].child.types[1].active=true;
+            this.tabs[1].child.types[0].active=false;
+          }
+           else{
+            this.activeChildTab = this.tabs[1].child.types[0];
+            this.tabs[1].child.types[1].active=false;
+            this.tabs[1].child.types[0].active=true;
+           }
         break;
     }
   }

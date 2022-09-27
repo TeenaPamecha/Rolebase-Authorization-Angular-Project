@@ -7,7 +7,7 @@ import * as formSharedComponents from '../shared';
 
 const routes: Routes = [
     {
-        path: '',
+        path: 'admin',
         component: AdminComponent,
         children: [
           {

@@ -13,7 +13,7 @@
                   <i class=" active-image {{ tab.activeIcon }}" class="active-image"
                     [class.active]="activeTab === tab" ></i></span>
                 <!-- (click)="navigate(tab) && !tab?.child" -->
-                <a class=" nav-link pt-1" (click)="navigate(tab)">
+                <a class=" nav-link cursor-pointer pt-1" (click)="navigate(tab)">
                   <i class="mr-3" [ngClass]="tab.icon"></i>{{ tab.name }}
                 </a>
                 <span class="ml-2 pl-5" *ngIf="tab?.child">
@@ -24,9 +24,9 @@
                 </span>
               </li>
               <div [hidden]="!(tab.child  && activeTab === tab) ">
-                <span class="d-flex flex-column">
-                  <span *ngFor="let child of tab?.child?.types" class="nav-child-link">
-                    <span *hasPermission="child?.permissions" (click)="navigate(child)">
+                <span class="d-flex flex-column cursor-pointer">
+                  <span *ngFor="let child of tab?.child?.types" class="nav-child-link ml-5" >
+                    <span *hasPermission="child?.permissions" [class.active]="child.active"  (click)="navigate(child)">
                       {{child.name}}
                     </span>
                   </span>
