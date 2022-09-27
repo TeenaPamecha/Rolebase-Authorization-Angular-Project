@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NormalUserComponent } from './normalUser.component';
 import * as formComponents from './components';
+import * as formSharedComponents from '../shared';
 
 const routes: Routes = [
   {
@@ -16,12 +17,23 @@ const routes: Routes = [
       {
         path: 'user',
         component: formComponents.UserComponent,
-        children: [],
+        children: [
+          {
+            path: 'profile',
+            component:formSharedComponents.ProfileComponent,
+            children: [],
+          },
+          {
+            path: 'change-password',
+            component:formSharedComponents.ChangePasswordComponent,
+            children: [],
+          },
+          { path: '', redirectTo: 'profile', pathMatch: 'full' },
+        ],
       },
       { path: '', redirectTo: 'home', pathMatch: 'full' }
     ]
-  },
-
+  }
 ];
 
 @NgModule({

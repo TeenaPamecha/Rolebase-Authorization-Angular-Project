@@ -1,0 +1,71 @@
+  <app-loader *ngIf="loading"></app-loader>
+  <!-- Sidebar -->
+  <nav id="sidebarMenu" *ngIf="!loading" class="collapse d-lg-block sidebar collapse bg-dark">
+    <div class="position-sticky">
+      <div class="list-group list-group-flush mx-3 mt-4">
+        <ul class="collapse show list-group list-group-flush nav flex-column pt-3">
+          <div *ngFor="let tab of tabs;let i=index" class="tabs">
+            <div *ngIf=tab?.display>
+              <li class="nav-item py-3 d-flex align-items-center" *hasPermission="tab.permissions"
+                [class.active]="activeTab === tab">
+                <span> <i class="{{ tab.icon }}"
+                    [class.active]="activeTab !== tab" ></i>
+                  <i class=" active-image {{ tab.activeIcon }}" class="active-image"
+                    [class.active]="activeTab === tab" ></i></span>
+                <!-- (click)="navigate(tab) && !tab?.child" -->
+                <a class=" nav-link pt-1" (click)="navigate(tab)">
+                  <i class="mr-3" [ngClass]="tab.icon"></i>{{ tab.name }}
+                </a>
+                <span class="ml-2 pl-5" *ngIf="tab?.child">
+                  <img (click)="navigate(tab)" src="assets/images/revamp/orange_arrow.svg" alt=""
+                    *ngIf="activeTab === tab" />
+                  <img (click)="navigate(tab)" src="assets/images/revamp/downArrow.svg" alt=""
+                    *ngIf="activeTab !== tab" />
+                </span>
+              </li>
+              <div [hidden]="!(tab.child  && activeTab === tab) ">
+                <span class="d-flex flex-column">
+                  <span *ngFor="let child of tab?.child?.types" class="nav-child-link">
+                    <span *hasPermission="child?.permissions" (click)="navigate(child)">
+                      {{child.name}}
+                    </span>
+                  </span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </ul>
+        <!-- <ul id="collapseExample2" class="collapse list-group list-group-flush nav flex-column pt-3">
+          <div *ngFor="let tab of tabs;let i=index" class="tabs">
+            <div *ngIf=tab?.display>
+              <li class="nav-item py-3 d-flex align-items-center" *hasPermission="tab.permissions"
+                [class.active]="activeTab === tab">
+                <span> <i class="{{ tab.icon }}" class="default-image" [class.active]="activeTab !== tab"></i>
+                  <i class="{{ tab.activeIcon }}" class="active-image" [class.active]="activeTab === tab"></i>
+                </span>
+                <a class=" nav-link pt-1">
+                  <i class="mr-3" [ngClass]="tab?.icon"></i>{{ tab.name }}
+                </a>
+                <span class="ml-2 pl-5" *ngIf="tab?.child">
+                  <img (click)="navigate(tab)" src="assets/images/revamp/orange_arrow.svg" alt=""
+                    *ngIf="activeTab === tab">
+                  <img (click)="navigate(tab)" src="assets/images/revamp/downArrow.svg" alt=""
+                    *ngIf="activeTab !== tab"> 
+                </span>
+              </li>
+              <div [hidden]="!(tab.child  && activeTab === tab) ">
+                <span class="d-flex flex-column">
+                  <span *ngFor="let child of tab?.child?.types" class="nav-child-link">
+                    <span *hasPermission="child?.permissions" (click)="navigate(child)">
+                      {{child.name}}
+                    </span>
+                  </span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </ul> -->
+      </div>
+    </div>
+  </nav>
+  <!-- Sidebar -->

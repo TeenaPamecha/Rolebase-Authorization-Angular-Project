@@ -1,37 +1,36 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules,PreloadingStrategy } from '@angular/router';
 
-import { AuthGuard } from './core/guards/auth.guard';
-import { Role } from './core/models';
+import { AuthGuard, Role } from './core';
 
 const routes: Routes = [
-    {
-        path: '',
-        loadChildren: () =>
-          import('./normalUser/normalUser.module').then(
-            (m) => m.NormalUserModule
-          ),
-        canActivate: [AuthGuard],
-        data: { roles: [Role.User] }
-    },
-    {
-        path: 'admin',
-        loadChildren: () =>
-        import('./admin/admin.module').then(
-          (m) => m.AdminModule
-        ),
-        canActivate: [AuthGuard],
-        data: { roles: [Role.Admin] }
-    },
-    {
-      path: '',
-      loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
-    },
-    { path: '**', redirectTo: '' }
+  {
+    path: 'normalUser',
+    loadChildren: () =>
+      import('./shared/shared.module').then(
+        (m) => m.SharedModule
+      ),
+    canActivate: [AuthGuard],
+    data: { roles: [Role.User] }
+  },
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./shared/shared.module').then(
+        (m) => m.SharedModule
+      ),
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Admin] }
+  },
+  {
+    path: '',
+    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
+  },
+  { path: '**', redirectTo:''}
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }

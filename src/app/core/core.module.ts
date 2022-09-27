@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
 import * as fromGuards from './guards';
+import * as fromModels from './models';
 import * as fromInterceptors from './interceptors';
 import * as fromServices from './services';
 
@@ -11,7 +12,7 @@ import * as fromServices from './services';
   providers: [
     ...fromServices.services,
     ...fromGuards.guards,
-    ...fromInterceptors.interceptors,
+    ...fromInterceptors.interceptors
   ],
   declarations: [],
   exports: [],

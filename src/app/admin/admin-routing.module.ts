@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AdminComponent } from './admin.component';
 import * as fromComponents from './components';
+import * as formSharedComponents from '../shared';
 
 const routes: Routes = [
     {
@@ -10,13 +11,25 @@ const routes: Routes = [
         component: AdminComponent,
         children: [
           {
-            path: 'role-list',
-            component:fromComponents.RoleListComponent,
-            children: [],
-          },
-          {
             path: 'user',
             component:fromComponents.UserComponent,
+            children: [
+              {
+                path: 'profile',
+                component:formSharedComponents.ProfileComponent,
+                children: [],
+              },
+              {
+                path: 'change-password',
+                component:formSharedComponents.ChangePasswordComponent,
+                children: [],
+              },
+              { path: '', redirectTo: 'profile', pathMatch: 'full' },
+            ],
+          },
+          {
+            path: 'role-list',
+            component:fromComponents.RoleListComponent,
             children: [],
           },
           {
@@ -29,7 +42,7 @@ const routes: Routes = [
             component:fromComponents.ReportComponent,
             children: [],
           },
-          { path: '', redirectTo: 'role-list', pathMatch: 'full' },
+          { path: '', redirectTo: 'user', pathMatch: 'full' },
         ]
     }
 ];

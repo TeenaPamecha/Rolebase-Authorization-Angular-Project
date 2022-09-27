@@ -1,21 +1,25 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { SharedRoutingModule} from './shared-routing.module';
 
 import * as fromPipes from './pipes';
 import * as fromComponents from './components';
 import * as fromDirectives from './directives';
+import * as fromLayout from './components/layout';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedRoutingModule
   ],
   declarations: [
     ...fromPipes.pipes,
     ...fromComponents.components,
-    ...fromDirectives.directives
+    ...fromDirectives.directives,
+    ...fromLayout.layout
   ],
   exports: [
     CommonModule,
@@ -23,7 +27,8 @@ import * as fromDirectives from './directives';
     ReactiveFormsModule,
     ...fromPipes.pipes,
     ...fromComponents.components,
-    ...fromDirectives.directives
+    ...fromDirectives.directives,
+    ...fromLayout.layout
   ],
 })
 export class SharedModule {}
